@@ -13,7 +13,7 @@
 --
 
 -- tracking user access
-CREATE TABLE track_object_access_log (
+CREATE TABLE if not exists track_object_access_log (
   `access_unixtime` BIGINT(20) UNSIGNED                                                                                                  NOT NULL,
   `login_id`        INT(10) UNSIGNED                                                                                                     NOT NULL,
   `object_type`     ENUM('dataset', 'metric', 'glossary', 'flow', 'lineage:data', 'lineage:flow', 'lineage:metric', 'lineage:metricJob') NOT NULL DEFAULT 'dataset',

@@ -13,7 +13,7 @@
 --
 
 
-CREATE TABLE `log_jira__hdfs_directory_to_owner_map` (
+CREATE TABLE if not exists `log_jira__hdfs_directory_to_owner_map` (
   `hdfs_name` varchar(50) NOT NULL,
   `directory_path` varchar(500) NOT NULL,
   `ref_directory_path` varchar(50) DEFAULT NULL,

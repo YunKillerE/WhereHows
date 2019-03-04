@@ -5,7 +5,8 @@ export default Ember.Component.extend({
     favorites: function(dataset) {
       var url = '/api/v1/datasets/' + dataset.id + '/favorite'
       var method = !dataset.isFavorite ? 'POST' : 'DELETE'
-      var token = $("#csrfToken").val().replace('/', '')
+      //var token = $("#csrfToken").val().replace('/', '')
+      var token = $("#csrfToken").val()?$("#csrfToken").val().replace('/', ''):'';
       var _this = this
       $.ajax({
         url: url,

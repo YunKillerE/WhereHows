@@ -13,7 +13,7 @@
 --
 
 
-CREATE TABLE dataset_owner (
+CREATE TABLE if not exists dataset_owner (
   `dataset_id`    INT UNSIGNED NOT NULL,
   `dataset_urn`   VARCHAR(200) NOT NULL,
   `owner_id`      VARCHAR(127) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE dataset_owner (
   UNIQUE KEY `with_urn` (`dataset_urn`, `owner_id`, `app_id`, `owner_source`)
 );
 
-CREATE TABLE stg_dataset_owner (
+CREATE TABLE if not exists stg_dataset_owner (
   `dataset_id` INT COMMENT 'dataset_id',
   `dataset_urn` VARCHAR(200) NOT NULL,
   `owner_id` VARCHAR(127) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE stg_dataset_owner (
   KEY db_name_index (db_name)
 );
 
-CREATE TABLE stg_dataset_owner_unmatched (
+CREATE TABLE if not exists stg_dataset_owner_unmatched (
   `dataset_urn` VARCHAR(200) NOT NULL,
   `owner_id` VARCHAR(127) NOT NULL,
   `sort_id` SMALLINT COMMENT '0 = primary owner, order by priority/importance',
@@ -80,7 +80,7 @@ CREATE TABLE stg_dataset_owner_unmatched (
   KEY db_name_index (db_name)
 );
 
-CREATE TABLE `dir_external_user_info` (
+CREATE TABLE if not exists `dir_external_user_info` (
   `app_id` smallint(5) unsigned NOT NULL,
   `user_id` varchar(50) NOT NULL,
   `urn` varchar(200) DEFAULT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE `dir_external_user_info` (
   KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `dir_external_group_user_map` (
+CREATE TABLE if not exists `dir_external_group_user_map` (
   `app_id` smallint(5) unsigned NOT NULL,
   `group_id` varchar(50) NOT NULL,
   `sort_id` smallint(6) NOT NULL,

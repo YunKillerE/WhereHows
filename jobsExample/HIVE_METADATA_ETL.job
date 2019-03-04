@@ -1,0 +1,60 @@
+# Fetch Hive dataset metadata
+
+# Common ETL configs
+job.class=metadata.etl.dataset.hive.HiveMetadataEtl
+#job.cron.expr=0/1 * * * * ? *
+job.cron.expr=0 0 19 * * ? *
+job.timeout=12000
+#job.cmd.params=
+#job.disabled=1
+job.ref.id=65
+
+# hive metastore jdbc url
+hive.metastore.jdbc.url=jdbc:mysql://xxxx/hive
+
+# hive metastore jdbc driver
+hive.metastore.jdbc.driver=com.mysql.jdbc.Driver
+
+hive.metastore.reconnect.time=1000
+
+# hive metastore user name
+hive.metastore.username=xx
+
+# hive metastore password
+hive.metastore.password=xx
+
+hive.database_black_list=your_databsae_black_list
+
+hive.database_white_list=your_database_white_list
+
+# Place to store the schema csv file
+hive.schema_csv_file=/alidata4/wherehows/howsjobs/hive_schema.csv
+
+# Place to store the schema json file
+hive.schema_json_file=/alidata4/wherehows/howsjobs/hive_schema.json
+
+# Place to store the field metadata csv file
+hive.field_metadata=/alidata4/wherehows/howsjobs/hive_field_metadata.csv
+
+# Place to store the hdfs map csv file
+hive.hdfs_map_csv_file=/alidata4/wherehows/howsjobs/hive_hdfs_map.csv
+
+# Place to store the hive instance csv file
+hive.instance_csv_file=/alidata4/wherehows/howsjobs/hive_instance.csv
+
+# Place to store the dependency csv file
+hive.dependency_csv_file=/alidata4/wherehows/howsjobs/hive_dependency.csv
+
+# HDFS namenode IPC URI
+hdfs.namenode.ipc.uri=hdfs://xxxx:8020
+
+# Enable/disable kerberos authentication & related configs
+kerberos.auth=False
+kerberos.keytab.file=
+kerberos.principal=
+
+krb5.kdc=
+krb5.realm=
+
+# innodb_lock_wait_timeout when accessing MySQL Db
+innodb_lock_wait_timeout=1500

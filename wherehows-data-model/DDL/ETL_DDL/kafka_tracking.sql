@@ -27,7 +27,7 @@
 -- wherehows-data-model/avro
 
 -- staging table for Gobblin tracking event compaction
-CREATE TABLE `stg_kafka_gobblin_compaction` (
+CREATE TABLE if not exists `stg_kafka_gobblin_compaction` (
   `cluster`         VARCHAR(20) NOT NULL,
   `dataset`         VARCHAR(100) NOT NULL,
   `partition_type`  VARCHAR(20) DEFAULT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE `stg_kafka_gobblin_compaction` (
 
 
 -- staging table for Gobblin tracking event lumos
-CREATE TABLE `stg_kafka_gobblin_lumos` (
+CREATE TABLE if not exists `stg_kafka_gobblin_lumos` (
   `cluster`     VARCHAR(20) NOT NULL,
   `dataset`     VARCHAR(100) NOT NULL,
   `location`    VARCHAR(200) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `stg_kafka_gobblin_lumos` (
 
 
 -- staging table for Gobblin tracking event distcp_ng
-CREATE TABLE `stg_kafka_gobblin_distcp` (
+CREATE TABLE if not exists `stg_kafka_gobblin_distcp` (
   `cluster`     VARCHAR(20) NOT NULL,
   `dataset`     VARCHAR(100) NOT NULL,
   `partition_type`  VARCHAR(20) DEFAULT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `stg_kafka_gobblin_distcp` (
 
 
 -- staging table for Metastore Audit Event, include TableAudit / PartitionAudit
-CREATE TABLE `stg_kafka_metastore_audit` (
+CREATE TABLE if not exists `stg_kafka_metastore_audit` (
   `server`          VARCHAR(20) NOT NULL,
   `instance`        VARCHAR(20) NOT NULL,
   `app_name`        VARCHAR(50) NOT NULL,
@@ -128,7 +128,7 @@ CREATE TABLE `stg_kafka_metastore_audit` (
 SET TIME_ZONE='US/Pacific';	-- this needs to be customized based on your time zone
 SELECT @@session.time_zone, current_timestamp;
 
-CREATE TABLE log_dataset_instance_load_status  (
+CREATE TABLE if not exists log_dataset_instance_load_status  (
 	dataset_id         	int(11) UNSIGNED NOT NULL DEFAULT '0',
 	db_id              	smallint(6) NOT NULL DEFAULT '0',
 	dataset_type       	varchar(30) COMMENT 'hive,teradata,oracle,hdfs...'  NOT NULL,

@@ -16,7 +16,7 @@
 -- dict_dataset, dict_dataset_sample, dict_field_detail, dict_dataset_schema_history
 
 -- stagging table for dataset
-CREATE TABLE `stg_dict_dataset` (
+CREATE TABLE if not exists `stg_dict_dataset` (
   `name`                        VARCHAR(200) NOT NULL,
   `schema`                      MEDIUMTEXT CHARACTER SET utf8,
   `schema_type`                 VARCHAR(50) DEFAULT 'JSON' COMMENT 'JSON, Hive, DDL, XML, CSV',
@@ -53,7 +53,7 @@ CREATE TABLE `stg_dict_dataset` (
   PARTITIONS 8;
 
 -- dataset table
-CREATE TABLE `dict_dataset` (
+CREATE TABLE if not exists `dict_dataset` (
   `id`                          INT(11) UNSIGNED NOT NULL                                                                   AUTO_INCREMENT,
   `name`                        VARCHAR(200) CHARACTER SET utf8                                                             NOT NULL,
   `schema`                      MEDIUMTEXT CHARACTER SET utf8,
@@ -95,7 +95,7 @@ CREATE TABLE `dict_dataset` (
   DEFAULT CHARSET = latin1;
 
 -- stagging table for sample data
-CREATE TABLE `stg_dict_dataset_sample` (
+CREATE TABLE if not exists `stg_dict_dataset_sample` (
   `db_id`      SMALLINT  UNSIGNED,
   `urn`        VARCHAR(200) NOT NULL DEFAULT '',
   `dataset_id` INT(11)               NULL,
@@ -109,7 +109,7 @@ CREATE TABLE `stg_dict_dataset_sample` (
   DEFAULT CHARSET = utf8;
 
 -- sample data table
-CREATE TABLE `dict_dataset_sample` (
+CREATE TABLE if not exists `dict_dataset_sample` (
   `id`         INT(11) NOT NULL AUTO_INCREMENT,
   `dataset_id` INT(11)          NULL,
   `urn`        VARCHAR(200)     NULL,
@@ -126,7 +126,7 @@ CREATE TABLE `dict_dataset_sample` (
   DEFAULT CHARSET = utf8;
 
 -- stagging table for field detail
-CREATE TABLE `stg_dict_field_detail` (
+CREATE TABLE if not exists `stg_dict_field_detail` (
   `db_id`          SMALLINT  UNSIGNED,
   `urn`            VARCHAR(200)         NOT NULL,
   `sort_id`        SMALLINT(5) UNSIGNED NOT NULL,
@@ -156,7 +156,7 @@ CREATE TABLE `stg_dict_field_detail` (
   PARTITIONS 8;
 
 -- field detail table
-CREATE TABLE `dict_field_detail` (
+CREATE TABLE if not exists `dict_field_detail` (
   `field_id`           INT(11) UNSIGNED     NOT NULL AUTO_INCREMENT,
   `dataset_id`         INT(11) UNSIGNED     NOT NULL,
   `fields_layout_id`   INT(11) UNSIGNED     NOT NULL,
@@ -204,7 +204,7 @@ CREATE TABLE `dict_field_detail` (
   COMMENT = 'Flattened Fields/Columns';
 
 -- schema history
-CREATE TABLE `dict_dataset_schema_history` (
+CREATE TABLE if not exists `dict_dataset_schema_history` (
   `id`            INT(11) AUTO_INCREMENT NOT NULL,
   `dataset_id`    INT(11)                NULL,
   `urn`           VARCHAR(200)           NOT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE `dict_dataset_schema_history` (
   AUTO_INCREMENT = 0;
 
 -- staging table table of fields to comments mapping
-CREATE TABLE `stg_dict_dataset_field_comment` (
+CREATE TABLE if not exists `stg_dict_dataset_field_comment` (
   `field_id` int(11) UNSIGNED NOT NULL,
   `comment_id` bigint(20) NOT NULL,
   `dataset_id` int(11) UNSIGNED NOT NULL,
@@ -230,7 +230,7 @@ CREATE TABLE `stg_dict_dataset_field_comment` (
 ;
 
 -- fields to comments mapping
-CREATE TABLE `dict_dataset_field_comment` (
+CREATE TABLE if not exists `dict_dataset_field_comment` (
   `field_id`   INT(11) UNSIGNED NOT NULL,
   `comment_id` BIGINT(20) NOT NULL,
   `dataset_id` INT(11) UNSIGNED NOT NULL,
@@ -241,7 +241,7 @@ CREATE TABLE `dict_dataset_field_comment` (
   ENGINE = InnoDB;
 
 -- dataset comments
-CREATE TABLE comments (
+CREATE TABLE if not exists comments (
   `id`           INT(11) AUTO_INCREMENT                                                                       NOT NULL,
   `text`         TEXT CHARACTER SET utf8                                                                      NOT NULL,
   `user_id`      INT(11)                                                                                      NOT NULL,
@@ -260,7 +260,7 @@ CREATE TABLE comments (
   AUTO_INCREMENT = 0;
 
 -- field comments
-CREATE TABLE `field_comments` (
+CREATE TABLE if not exists `field_comments` (
   `id`                     INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id`                INT(11)          NOT NULL DEFAULT '0',
   `comment`                VARCHAR(4000)    NOT NULL,
@@ -276,7 +276,7 @@ CREATE TABLE `field_comments` (
   DEFAULT CHARSET = utf8;
 
 -- dict_dataset_instance
-CREATE TABLE dict_dataset_instance  (
+CREATE TABLE if not exists dict_dataset_instance  (
 	dataset_id           	int(11) UNSIGNED NOT NULL,
 	db_id                	smallint(6) UNSIGNED COMMENT 'FK to cfg_database'  NOT NULL DEFAULT '0',
 	deployment_tier      	enum('local','grid','dev','int','ei','ei2','ei3','qa','stg','prod') NOT NULL DEFAULT 'dev',
@@ -319,7 +319,7 @@ CREATE INDEX native_name USING BTREE
 	ON dict_dataset_instance(native_name);
 
 
-CREATE TABLE stg_dict_dataset_instance  (
+CREATE TABLE if not exists stg_dict_dataset_instance  (
 	dataset_urn          	varchar(200) NOT NULL,
 	db_id                	smallint(6) UNSIGNED NOT NULL DEFAULT '0',
 	deployment_tier      	enum('local','grid','dev','int','ei','ei2','ei3','qa','stg','prod') NOT NULL DEFAULT 'dev',

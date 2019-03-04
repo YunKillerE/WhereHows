@@ -12,7 +12,7 @@
 -- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 --
 
-CREATE TABLE flow (
+CREATE TABLE if not exists flow (
   app_id               SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id              INT UNSIGNED      NOT NULL
@@ -39,7 +39,7 @@ CREATE TABLE flow (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler flow table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE stg_flow (
+CREATE TABLE if not exists stg_flow (
   app_id               SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id              INT UNSIGNED COMMENT 'flow id either inherit from source or generated',
@@ -64,7 +64,7 @@ CREATE TABLE stg_flow (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler flow table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE flow_source_id_map (
+CREATE TABLE if not exists flow_source_id_map (
   app_id           SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id          INT UNSIGNED      NOT NULL AUTO_INCREMENT
@@ -79,7 +79,7 @@ CREATE TABLE flow_source_id_map (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler flow id mapping table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE flow_job (
+CREATE TABLE if not exists flow_job (
   app_id               SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id              INT UNSIGNED      NOT NULL
@@ -112,7 +112,7 @@ CREATE TABLE flow_job (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler job table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE stg_flow_job (
+CREATE TABLE if not exists stg_flow_job (
   app_id         SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id        INT UNSIGNED COMMENT 'flow id',
@@ -143,7 +143,7 @@ CREATE TABLE stg_flow_job (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler job table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE job_source_id_map (
+CREATE TABLE if not exists job_source_id_map (
   app_id           SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   job_id           INT UNSIGNED      NOT NULL AUTO_INCREMENT
@@ -158,7 +158,7 @@ CREATE TABLE job_source_id_map (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler flow id mapping table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE flow_dag (
+CREATE TABLE if not exists flow_dag (
   app_id         SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id        INT UNSIGNED NOT NULL
@@ -176,7 +176,7 @@ CREATE TABLE flow_dag (
   DEFAULT CHARSET = utf8
   COMMENT = 'Flow dag reference table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE stg_flow_dag (
+CREATE TABLE if not exists stg_flow_dag (
   app_id         SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id        INT UNSIGNED NOT NULL
@@ -193,7 +193,7 @@ CREATE TABLE stg_flow_dag (
   DEFAULT CHARSET = utf8
   COMMENT = 'Flow dag reference table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE stg_flow_dag_edge (
+CREATE TABLE if not exists stg_flow_dag_edge (
   app_id          SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id         INT UNSIGNED COMMENT 'flow id',
@@ -214,7 +214,7 @@ CREATE TABLE stg_flow_dag_edge (
   DEFAULT CHARSET = utf8
   COMMENT = 'Flow dag table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE flow_execution (
+CREATE TABLE if not exists flow_execution (
   app_id           SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_exec_id     BIGINT UNSIGNED   NOT NULL
@@ -242,7 +242,7 @@ CREATE TABLE flow_execution (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler flow execution table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE flow_execution_id_map (
+CREATE TABLE if not exists flow_execution_id_map (
   app_id             SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_exec_id       BIGINT UNSIGNED   NOT NULL AUTO_INCREMENT
@@ -257,7 +257,7 @@ CREATE TABLE flow_execution_id_map (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler flow execution id mapping table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE stg_flow_execution (
+CREATE TABLE if not exists stg_flow_execution (
   app_id           SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_exec_id     BIGINT UNSIGNED COMMENT 'flow execution id',
@@ -282,7 +282,7 @@ CREATE TABLE stg_flow_execution (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler flow execution table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE job_execution (
+CREATE TABLE if not exists job_execution (
   app_id          SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_exec_id    BIGINT UNSIGNED COMMENT 'flow execution id',
@@ -314,7 +314,7 @@ CREATE TABLE job_execution (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler job execution table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE job_execution_id_map (
+CREATE TABLE if not exists job_execution_id_map (
   app_id             SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the job',
   job_exec_id        BIGINT UNSIGNED   NOT NULL AUTO_INCREMENT
@@ -329,7 +329,7 @@ CREATE TABLE job_execution_id_map (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler job execution id mapping table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE stg_job_execution (
+CREATE TABLE if not exists stg_job_execution (
   app_id          SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id         INT UNSIGNED COMMENT 'flow id',
@@ -359,7 +359,7 @@ CREATE TABLE stg_job_execution (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler job execution table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE flow_schedule (
+CREATE TABLE if not exists flow_schedule (
   app_id               SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id              INT UNSIGNED      NOT NULL
@@ -383,7 +383,7 @@ CREATE TABLE flow_schedule (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler flow schedule table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE stg_flow_schedule (
+CREATE TABLE if not exists stg_flow_schedule (
   app_id               SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id              INT UNSIGNED COMMENT 'flow id',
@@ -404,7 +404,7 @@ CREATE TABLE stg_flow_schedule (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler flow schedule table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE flow_owner_permission (
+CREATE TABLE if not exists flow_owner_permission (
   app_id         SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id        INT UNSIGNED      NOT NULL
@@ -423,7 +423,7 @@ CREATE TABLE flow_owner_permission (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler owner table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE stg_flow_owner_permission (
+CREATE TABLE if not exists stg_flow_owner_permission (
   app_id         SMALLINT UNSIGNED NOT NULL
   COMMENT 'application id of the flow',
   flow_id        INT UNSIGNED COMMENT 'flow id',
@@ -440,7 +440,7 @@ CREATE TABLE stg_flow_owner_permission (
   DEFAULT CHARSET = utf8
   COMMENT = 'Scheduler owner table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE job_execution_ext_reference (
+CREATE TABLE if not exists job_execution_ext_reference (
 	app_id         	smallint(5) UNSIGNED COMMENT 'application id of the flow'  NOT NULL,
 	job_exec_id    	bigint(20) UNSIGNED COMMENT 'job execution id either inherit or generated'  NOT NULL,
 	attempt_id     	smallint(6) COMMENT 'job execution attempt id'  DEFAULT '0',
@@ -469,7 +469,7 @@ CREATE INDEX idx_job_execution_ext_ref__ext_ref_id USING BTREE
 	ON job_execution_ext_reference(ext_ref_id);
 
 
-CREATE TABLE stg_job_execution_ext_reference (
+CREATE TABLE if not exists stg_job_execution_ext_reference (
 	app_id         	smallint(5) UNSIGNED COMMENT 'application id of the flow'  NOT NULL,
 	job_exec_id    	bigint(20) UNSIGNED COMMENT 'job execution id either inherit or generated'  NOT NULL,
 	attempt_id     	smallint(6) COMMENT 'job execution attempt id'  DEFAULT '0',
@@ -494,7 +494,7 @@ PARTITION BY HASH(app_id)
 	PARTITION p7)
 ;
 
-CREATE TABLE `cfg_job_type` (
+CREATE TABLE if not exists `cfg_job_type` (
   `job_type_id` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
   `job_type`    VARCHAR(50)          NOT NULL,
   `description` VARCHAR(200)         NULL,
@@ -506,7 +506,7 @@ CREATE TABLE `cfg_job_type` (
   DEFAULT CHARSET = utf8
   COMMENT = 'job types used in mutliple schedulers';
 
-CREATE TABLE `cfg_job_type_reverse_map` (
+CREATE TABLE if not exists `cfg_job_type_reverse_map` (
   `job_type_actual`   VARCHAR(50)
                       CHARACTER SET ascii NOT NULL,
   `job_type_id`       SMALLINT(6) UNSIGNED NOT NULL,

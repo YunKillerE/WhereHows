@@ -13,7 +13,7 @@
 --
 
 
-CREATE TABLE dataset_deployment (
+CREATE TABLE if not exists dataset_deployment (
   `dataset_id`      INT UNSIGNED NOT NULL,
   `dataset_urn`     VARCHAR(200) NOT NULL,
   `deployment_tier` VARCHAR(20)  NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE dataset_deployment (
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
-CREATE TABLE dataset_capacity (
+CREATE TABLE if not exists dataset_capacity (
   `dataset_id`    INT UNSIGNED NOT NULL,
   `dataset_urn`   VARCHAR(200) NOT NULL,
   `capacity_name` VARCHAR(100) NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE dataset_capacity (
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
-CREATE TABLE dataset_tag (
+CREATE TABLE if not exists dataset_tag (
   `dataset_id`    INT UNSIGNED NOT NULL,
   `dataset_urn`   VARCHAR(200) NOT NULL,
   `tag`           VARCHAR(100) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE dataset_tag (
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
-CREATE TABLE dataset_case_sensitivity (
+CREATE TABLE if not exists dataset_case_sensitivity (
   `dataset_id`    INT UNSIGNED NOT NULL,
   `dataset_urn`   VARCHAR(200) NOT NULL,
   `dataset_name`  BOOLEAN      NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE dataset_case_sensitivity (
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
-CREATE TABLE dataset_reference (
+CREATE TABLE if not exists dataset_reference (
   `dataset_id`       INT UNSIGNED NOT NULL,
   `dataset_urn`      VARCHAR(200) NOT NULL,
   `reference_type`   VARCHAR(20)  NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE dataset_reference (
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
-CREATE TABLE dataset_partition (
+CREATE TABLE if not exists dataset_partition (
   `dataset_id`                INT UNSIGNED NOT NULL,
   `dataset_urn`               VARCHAR(200) NOT NULL,
   `total_partition_level`     SMALLINT UNSIGNED  DEFAULT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE dataset_partition (
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
-CREATE TABLE `dataset_privacy_compliance` (
+CREATE TABLE if not exists `dataset_privacy_compliance` (
   `dataset_id`                INT(10) UNSIGNED NOT NULL,
   `dataset_urn`               VARCHAR(200)     NOT NULL,
   `compliance_purge_type`     VARCHAR(30)      DEFAULT NULL
@@ -120,7 +120,7 @@ CREATE TABLE `dataset_privacy_compliance` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE `dataset_security` (
+CREATE TABLE if not exists `dataset_security` (
   `dataset_id`                INT(10) UNSIGNED NOT NULL,
   `dataset_urn`               VARCHAR(200)     NOT NULL,
   `dataset_classification`    VARCHAR(1000)    DEFAULT NULL
@@ -143,7 +143,7 @@ CREATE TABLE `dataset_security` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE `dataset_compliance` (
+CREATE TABLE if not exists `dataset_compliance` (
   `dataset_id`                INT(10) UNSIGNED NOT NULL,
   `dataset_urn`               VARCHAR(200)     NOT NULL,
   `compliance_purge_type`     VARCHAR(30)      DEFAULT NULL
@@ -172,7 +172,7 @@ CREATE TABLE `dataset_compliance` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE dataset_constraint (
+CREATE TABLE if not exists dataset_constraint (
   `dataset_id`            INT UNSIGNED NOT NULL,
   `dataset_urn`           VARCHAR(200) NOT NULL,
   `constraint_type`       VARCHAR(20)  NOT NULL,
@@ -190,7 +190,7 @@ CREATE TABLE dataset_constraint (
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
-CREATE TABLE dataset_index (
+CREATE TABLE if not exists dataset_index (
   `dataset_id`     INT UNSIGNED NOT NULL,
   `dataset_urn`    VARCHAR(200) NOT NULL,
   `index_type`     VARCHAR(20)  NOT NULL,
@@ -205,7 +205,7 @@ CREATE TABLE dataset_index (
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
-CREATE TABLE dataset_schema_info (
+CREATE TABLE if not exists dataset_schema_info (
   `dataset_id`                   INT UNSIGNED NOT NULL,
   `dataset_urn`                  VARCHAR(200) NOT NULL,
   `is_backward_compatible`       BOOLEAN                  DEFAULT NULL,
@@ -228,7 +228,7 @@ CREATE TABLE dataset_schema_info (
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
-CREATE TABLE dataset_inventory (
+CREATE TABLE if not exists dataset_inventory (
   `event_date`                    DATE         NOT NULL,
   `data_platform`                 VARCHAR(50)  NOT NULL,
   `native_name`                   VARCHAR(200) NOT NULL,

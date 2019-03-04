@@ -12,7 +12,7 @@
 -- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 --
 
-CREATE TABLE `source_code_commit_info` (
+CREATE TABLE if not exists `source_code_commit_info` (
   `app_id`          SMALLINT(5) UNSIGNED DEFAULT NULL,
   `repository_urn`  VARCHAR(300) CHAR SET latin1 NOT NULL COMMENT 'the git repo urn',
   `commit_id`       VARCHAR(50) CHAR SET latin1  NOT NULL COMMENT 'the sha-1 hash of the commit',
@@ -32,7 +32,7 @@ CREATE TABLE `source_code_commit_info` (
   KEY (repository_urn, file_name, committer_email)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
-CREATE TABLE `stg_source_code_commit_info` (
+CREATE TABLE if not exists `stg_source_code_commit_info` (
   `app_id`          SMALLINT(5) UNSIGNED DEFAULT NULL,
   `repository_urn`  VARCHAR(300) CHAR SET latin1 NOT NULL COMMENT 'the git repo urn',
   `commit_id`       VARCHAR(50) CHAR SET latin1  NOT NULL COMMENT 'the sha-1 hash of the commit',
@@ -51,7 +51,7 @@ CREATE TABLE `stg_source_code_commit_info` (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 
-CREATE TABLE `stg_git_project` (
+CREATE TABLE if not exists `stg_git_project` (
   `app_id`          SMALLINT(5) UNSIGNED NOT NULL,
   `wh_etl_exec_id`  BIGINT COMMENT 'wherehows etl execution id that modified this record',
   `project_name`    VARCHAR(100) NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE `stg_git_project` (
   PRIMARY KEY (`project_name`, `scm_type`, `app_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
-CREATE TABLE `stg_product_repo` (
+CREATE TABLE if not exists `stg_product_repo` (
   `app_id`          SMALLINT(5) UNSIGNED NOT NULL,
   `wh_etl_exec_id`  BIGINT COMMENT 'wherehows etl execution id that modified this record',
   `scm_repo_fullname` VARCHAR(100) NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE `stg_product_repo` (
   PRIMARY KEY (`scm_repo_fullname`, `scm_type`, `app_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
-CREATE TABLE `stg_repo_owner` (
+CREATE TABLE if not exists `stg_repo_owner` (
   `app_id`          SMALLINT(5) UNSIGNED NOT NULL,
   `wh_etl_exec_id`  BIGINT COMMENT 'wherehows etl execution id that modified this record',
   `scm_repo_fullname` VARCHAR(100) NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `stg_repo_owner` (
   PRIMARY KEY (`scm_repo_fullname`, `scm_type`, `owner_type`, `owner_name`, `app_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
-CREATE TABLE stg_database_scm_map (
+CREATE TABLE if not exists stg_database_scm_map (
   `database_name`   VARCHAR(100) NOT NULL COMMENT 'database name',
   `database_type`   VARCHAR(50) NOT NULL COMMENT 'database type',
   `app_name`        VARCHAR(127) NOT NULL COMMENT 'the name of application',

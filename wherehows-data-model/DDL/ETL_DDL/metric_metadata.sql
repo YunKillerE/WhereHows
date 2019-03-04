@@ -13,7 +13,7 @@
 --
 
 -- metrics table
-CREATE TABLE dict_business_metric  (
+CREATE TABLE if not exists dict_business_metric  (
   `metric_id`                	SMALLINT(6) UNSIGNED AUTO_INCREMENT NOT NULL,
   `metric_name`              	VARCHAR(200) NOT NULL,
   `metric_description`       	VARCHAR(500) NULL,

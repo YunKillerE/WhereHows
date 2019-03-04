@@ -15,7 +15,7 @@
 -- create statement for users related tables :
 -- users, user_settings, watch
 
-CREATE TABLE users (
+CREATE TABLE if not exists users (
   id                       INT(11) AUTO_INCREMENT      NOT NULL,
   name                     VARCHAR(100)                NOT NULL,
   email                    VARCHAR(200)                NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE users (
 
 CREATE INDEX idx_users__username USING BTREE ON users(username);
 
-CREATE TABLE user_settings (
+CREATE TABLE if not exists user_settings (
   user_id             INT(11)                           NOT NULL,
   detail_default_view VARCHAR(20)                       NULL,
   default_watch       ENUM('monthly', 'weekly', 'daily', 'hourly') NULL DEFAULT 'weekly',
@@ -42,7 +42,7 @@ CREATE TABLE user_settings (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE watch (
+CREATE TABLE if not exists watch (
   id                BIGINT(20) AUTO_INCREMENT                                 NOT NULL,
   user_id           INT(11)                                                   NOT NULL,
   item_id           INT(11)                                                   NULL,
@@ -56,7 +56,7 @@ CREATE TABLE watch (
   AUTO_INCREMENT = 0
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE favorites (
+CREATE TABLE if not exists favorites (
   user_id    INT(11)   NOT NULL,
   dataset_id INT(11)   NOT NULL,
   created    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -65,7 +65,7 @@ CREATE TABLE favorites (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE user_login_history (
+CREATE TABLE if not exists user_login_history (
   log_id              INT(11) AUTO_INCREMENT NOT NULL,
   username            VARCHAR(20)            NOT NULL,
   authentication_type VARCHAR(20)            NOT NULL,

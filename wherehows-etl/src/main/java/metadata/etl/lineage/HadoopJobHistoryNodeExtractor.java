@@ -60,7 +60,7 @@ public class HadoopJobHistoryNodeExtractor {
   public HadoopJobHistoryNodeExtractor(Properties prop)
     throws Exception {
     this.serverURL = prop.getProperty(Constant.AZ_HADOOP_JOBHISTORY_KEY);
-
+/*
     String CURRENT_DIR = System.getProperty("user.dir");
     String WHZ_KRB5_DIR = System.getenv("WHZ_KRB5_DIR");
     String APP_HOME = System.getenv("APP_HOME");
@@ -68,9 +68,9 @@ public class HadoopJobHistoryNodeExtractor {
 
     String[] searchPath = new String[]{CURRENT_DIR, WHZ_KRB5_DIR, APP_HOME, USER_HOME, "/etc"};
 
-    System.setProperty("java.security.auth.login.config", findFileInSearchPath(searchPath, "gss-jaas.conf"));
-    System.setProperty("java.security.krb5.conf", findFileInSearchPath(searchPath, "krb5.conf"));
-
+    System.setProperty("java.security.auth.login.config", null);
+    System.setProperty("java.security.krb5.conf", null);
+*/
     if (System.getProperty("java.security.auth.login.config") == null
       || System.getProperty("java.security.krb5.conf") == null) {
       logger.warn("Can't find Java security config [krb5.conf, gss-jass.conf] for Kerberos! Trying other authentication methods...");
@@ -82,10 +82,10 @@ public class HadoopJobHistoryNodeExtractor {
       System.setProperty("sun.security.krb5.debug", "false");
     }
     System.setProperty("javax.security.auth.useSubjectCredsOnly", "false");
-
+/*
     System.setProperty("java.security.krb5.realm", prop.getProperty(Constant.KRB5_REALM));
     System.setProperty("java.security.krb5.kdc", prop.getProperty(Constant.KRB5_KDC));
-
+*/
     PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
     cm.setMaxTotal(200);
     cm.setDefaultMaxPerRoute(100);

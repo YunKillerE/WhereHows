@@ -5,7 +5,8 @@ export default Ember.Component.extend({
     owned: function(dataset) {
       var url = '/api/v1/datasets/' + dataset.id + '/own';
       var method = !dataset.isOwned ? 'POST' : 'DELETE';
-      var token = $("#csrfToken").val().replace('/', '');
+      //var token = $("#csrfToken").val().replace('/', '');
+      var token = $("#csrfToken").val()?$("#csrfToken").val().replace('/', ''):'';
       var _this = this;
       $.ajax({
         url: url,

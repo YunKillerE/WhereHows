@@ -166,7 +166,8 @@ export default Ember.Component.extend({
     },
     remove: function(comment) {
       var url = '/api/v1/datasets/' + comment.datasetId + '/comments/' + comment.id
-      var token = $("#csrfToken").val().replace('/', '')
+      //var token = $("#csrfToken").val().replace('/', '')
+      var token = $("#csrfToken").val()?$("#csrfToken").val().replace('/', ''):'';
       var _this = this
       $.ajax({
         url: url,
@@ -189,7 +190,8 @@ export default Ember.Component.extend({
       $("#datasetComment-preview").html(marked(text))
     },
     update: function() {
-      var token = $("#csrfToken").val().replace('/', '')
+      //var token = $("#csrfToken").val().replace('/', '')
+      var token = $("#csrfToken").val()?$("#csrfToken").val().replace('/', ''):'';
       var _this = this;
       comment.datasetId = this.get('dataset.id')
       var cmnt = {}
@@ -215,7 +217,8 @@ export default Ember.Component.extend({
 
     },
     create: function(comment) {
-      var token = $("#csrfToken").val().replace('/', '')
+      //var token = $("#csrfToken").val().replace('/', '')
+      var token = $("#csrfToken").val()?$("#csrfToken").val().replace('/', ''):'';
       var _this = this;
       var cmnt = {}
       var isEdit = this.get('isEdit')

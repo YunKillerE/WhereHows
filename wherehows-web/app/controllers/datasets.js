@@ -85,7 +85,8 @@ export default Ember.Controller.extend({
       }
       var _this = this
       var url = "/api/v1/urn/watch"
-      var token = $("#csrfToken").val().replace('/', '')
+      //var token = $("#csrfToken").val().replace('/', '')
+      var token = $("#csrfToken").val()?$("#csrfToken").val().replace('/', ''):'';
       if(!this.get('urnWatched')) {
         //this.set('urnWatched', false)
         $.ajax({

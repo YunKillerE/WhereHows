@@ -13,7 +13,7 @@
 --
 
 -- created statements for lineage related tables
-CREATE TABLE IF NOT EXISTS `stg_job_execution_data_lineage` (
+CREATE TABLE if not exists IF NOT EXISTS `stg_job_execution_data_lineage` (
   `app_id`                 SMALLINT(5) UNSIGNED                                ,
   `flow_exec_id`           BIGINT(20) UNSIGNED                                 ,
   `job_exec_id`            BIGINT(20) UNSIGNED                                 ,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `stg_job_execution_data_lineage` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE IF NOT EXISTS `job_execution_data_lineage` (
+CREATE TABLE if not exists IF NOT EXISTS `job_execution_data_lineage` (
   `app_id`                 SMALLINT(5) UNSIGNED                       NOT NULL,
   `flow_exec_id`           BIGINT(20) UNSIGNED                                 NOT NULL,
   `job_exec_id`            BIGINT(20) UNSIGNED                                 NOT NULL
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `job_execution_data_lineage` (
   DEFAULT CHARSET = latin1
   COMMENT = 'Lineage table' PARTITION BY HASH (app_id) PARTITIONS 8;
 
-CREATE TABLE job_attempt_source_code  (
+CREATE TABLE if not exists job_attempt_source_code  (
 	application_id	int(11) NOT NULL,
 	job_id        	int(11) NOT NULL,
 	attempt_number	tinyint(4) NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE job_attempt_source_code  (
 ENGINE = InnoDB
 DEFAULT CHARSET = utf8;
 
-CREATE TABLE `job_execution_script` (
+CREATE TABLE if not exists `job_execution_script` (
   `app_id` int(11) NOT NULL,
   `job_id` int(11) NOT NULL,
   `script_name` varchar(512) NOT NULL DEFAULT '',

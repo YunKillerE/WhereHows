@@ -404,7 +404,8 @@ App.SchemaCommentComponent = Ember.Component.extend({
     },
     create: function() {
       var _this = this;
-      var token = $("#csrfToken").val().replace('/', '')
+      //var token = $("#csrfToken").val().replace('/', '')
+      var token = $("#csrfToken").val()?$("#csrfToken").val().replace('/', ''):'';
       var cmnt = this.get('comment')
       var dsid = this.get('datasetId')
       var cid = this.get('schema.id')
@@ -450,7 +451,8 @@ App.SchemaCommentComponent = Ember.Component.extend({
     },
     remove: function(comment){
       var _this = this
-      var token = $("#csrfToken").val().replace('/', '')
+      //var token = $("#csrfToken").val().replace('/', '')
+      var token = $("#csrfToken").val()?$("#csrfToken").val().replace('/', ''):'';
       var dsid = this.get('datasetId')
       var cid = this.get('schema.id')
       var url = '/api/v1/datasets/' + dsid + '/columns/' + cid
@@ -554,7 +556,8 @@ App.SchemaCommentComponent = Ember.Component.extend({
         { dataset_id: datasetId
         , field_id: fieldId
         }
-      var token = $("#csrfToken").val().replace("/", "")
+      //var token = $("#csrfToken").val().replace("/", "")
+      var token = $("#csrfToken").val()?$("#csrfToken").val().replace('/', ''):'';
       var uri = '/api/v1/datasets/'
       uri += params.dataset_id + '/columns/'
       uri += params.field_id + '/comments'

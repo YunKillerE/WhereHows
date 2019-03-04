@@ -13,7 +13,7 @@
 --
 
 -- configuration tables
-CREATE TABLE `wh_etl_job_schedule` (
+CREATE TABLE if not exists `wh_etl_job_schedule` (
   `wh_etl_job_name` VARCHAR(127)  NOT NULL
   COMMENT 'etl job name',
   `next_run` INT(10) UNSIGNED     DEFAULT NULL
@@ -25,7 +25,7 @@ CREATE TABLE `wh_etl_job_schedule` (
   DEFAULT CHARSET=utf8
   COMMENT='WhereHows ETL job scheduling table';
 
-CREATE TABLE `wh_etl_job_history` (
+CREATE TABLE if not exists `wh_etl_job_history` (
   `wh_etl_exec_id`  BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT
   COMMENT 'job execution id',
   `wh_etl_job_name` VARCHAR(127)                 NOT NULL
@@ -50,7 +50,7 @@ CREATE TABLE `wh_etl_job_history` (
   DEFAULT CHARSET = utf8
   COMMENT = 'WhereHows ETL execution history table';
 
-CREATE TABLE `cfg_application` (
+CREATE TABLE if not exists `cfg_application` (
   `app_id`                  SMALLINT    UNSIGNED NOT NULL,
   `app_code`                VARCHAR(128)         NOT NULL,
   `description`             VARCHAR(512)         NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE `cfg_application` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE cfg_database  (
+CREATE TABLE if not exists cfg_database  (
 	db_id                  	smallint(6) UNSIGNED NOT NULL,
 	db_code                	varchar(30) COMMENT 'Unique string without space'  NOT NULL,
 	primary_dataset_type    varchar(30) COMMENT 'What type of dataset this DB supports' NOT NULL DEFAULT '*',
@@ -97,7 +97,7 @@ DEFAULT CHARSET = utf8
 COMMENT = 'Abstract different storage instances as databases' ;
 
 
-CREATE TABLE stg_cfg_object_name_map  (
+CREATE TABLE if not exists stg_cfg_object_name_map  (
 	object_type             	varchar(100) NOT NULL,
 	object_sub_type         	varchar(100) NULL,
 	object_name             	varchar(350) NOT NULL,
@@ -120,7 +120,7 @@ CHARACTER SET latin1
 COLLATE latin1_swedish_ci
 COMMENT = 'Map alias (when is_identical_map=Y) and view dependency' ;
 
-CREATE TABLE cfg_object_name_map  (
+CREATE TABLE if not exists cfg_object_name_map  (
   obj_name_map_id         int(11) AUTO_INCREMENT NOT NULL,
   object_type             varchar(100) NOT NULL,
   object_sub_type         varchar(100) NULL,
@@ -144,7 +144,7 @@ AUTO_INCREMENT = 1
 COMMENT = 'Map alias (when is_identical_map=Y) and view dependency. Always map from Derived/Child (object) back to its Original/Parent (mapped_object)' ;
 
 
-CREATE TABLE cfg_deployment_tier  (
+CREATE TABLE if not exists cfg_deployment_tier  (
   tier_id      	tinyint(4) NOT NULL,
   tier_code    	varchar(25) COMMENT 'local,dev,test,qa,stg,prod' NOT NULL,
   tier_label    varchar(50) COMMENT 'display full name' NULL,
@@ -158,7 +158,7 @@ AUTO_INCREMENT = 0
 COMMENT = 'http://en.wikipedia.org/wiki/Deployment_environment';
 
 
-CREATE TABLE cfg_data_center  (
+CREATE TABLE if not exists cfg_data_center  (
 	data_center_id    	smallint(6) NOT NULL DEFAULT '0',
 	data_center_code  	varchar(30) NOT NULL,
 	data_center_name  	varchar(50) NOT NULL,
@@ -178,7 +178,7 @@ AUTO_INCREMENT = 0
 COMMENT = 'https://en.wikipedia.org/wiki/Data_center' ;
 
 
-CREATE TABLE cfg_cluster  (
+CREATE TABLE if not exists cfg_cluster  (
 	cluster_id    	        smallint(6) NOT NULL DEFAULT '0',
 	cluster_code  	        varchar(80) NOT NULL,
 	cluster_short_name      varchar(50) NOT NULL,
@@ -193,7 +193,7 @@ CREATE TABLE cfg_cluster  (
 COMMENT = 'https://en.wikipedia.org/wiki/Computer_cluster' ;
 
 
-CREATE TABLE IF NOT EXISTS cfg_search_score_boost (
+CREATE TABLE if not exists IF NOT EXISTS cfg_search_score_boost (
   `id` INT COMMENT 'dataset id',
   `static_boosting_score` INT COMMENT 'static boosting score for elastic search',
   PRIMARY KEY (`id`)

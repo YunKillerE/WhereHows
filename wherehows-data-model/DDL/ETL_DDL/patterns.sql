@@ -14,7 +14,7 @@
 
 
 -- file name pattern to abstract from file level to directory level
-CREATE TABLE filename_pattern
+CREATE TABLE if not exists filename_pattern
 (
   filename_pattern_id INT(11) NOT NULL AUTO_INCREMENT,
   regex               VARCHAR(100),
@@ -22,7 +22,7 @@ CREATE TABLE filename_pattern
 );
 
 -- partitions pattern to abstract from partition level to dataset level
-CREATE TABLE `dataset_partition_layout_pattern` (
+CREATE TABLE if not exists `dataset_partition_layout_pattern` (
   `layout_id`               INT(11) NOT NULL AUTO_INCREMENT,
   `regex`                   VARCHAR(50)      DEFAULT NULL,
   `mask`                    VARCHAR(50)      DEFAULT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE `dataset_partition_layout_pattern` (
   DEFAULT CHARSET = utf8;
 
 -- log lineage pattern to extract lineage from logs
-CREATE TABLE `log_lineage_pattern` (
+CREATE TABLE if not exists `log_lineage_pattern` (
   `pattern_id`          INT(11)      NOT NULL AUTO_INCREMENT,
   `pattern_type`        VARCHAR(20)              DEFAULT NULL
   COMMENT 'type of job that have this log pattern',
@@ -67,7 +67,7 @@ CREATE TABLE `log_lineage_pattern` (
   DEFAULT CHARSET = utf8;
 
 -- patterns used to discover the hadoop id inside log
-CREATE TABLE `log_reference_job_id_pattern` (
+CREATE TABLE if not exists `log_reference_job_id_pattern` (
   `pattern_id`             INT(11)      NOT NULL AUTO_INCREMENT,
   `pattern_type`           VARCHAR(20)  DEFAULT NULL
   COMMENT 'type of job that have this log pattern',

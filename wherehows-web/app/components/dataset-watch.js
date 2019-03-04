@@ -7,7 +7,8 @@ export default Ember.Component.extend({
       var method = !dataset.watchId ? 'POST' : 'DELETE'
       if(method.toLowerCase() === 'delete')
         url += '/' + dataset.watchId
-      var token = $("#csrfToken").val().replace('/', '')
+      //var token = $("#csrfToken").val().replace('/', '')
+      var token = $("#csrfToken").val()?$("#csrfToken").val().replace('/', ''):'';
       var _this = this
       $.ajax({
         url: url,

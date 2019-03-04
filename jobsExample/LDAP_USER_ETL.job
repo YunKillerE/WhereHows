@@ -1,0 +1,26 @@
+# Fetch LDAP info, every day
+job.class=metadata.etl.ldap.LdapEtl
+job.cron.expr=0 0 0 * * ?
+#job.cron.expr=0/1 * * * * ? *
+job.timeout=600
+#job.cmd.params=
+#job.disabled=1
+job.ref.id=300
+
+ldap.ceo.user.id=cn=xxx,dc=xxx,dc=com
+
+ldap.context.factory=com.sun.jndi.ldap.LdapCtxFactory
+ldap.context.provider.url=ldap://xxxx:389
+ldap.context.security.principal=cn=xxx,dc=xxx,dc=com
+ldap.context.security.credentials=xxxx
+ldap.search.domains=["cn=xx,ou=xxx,dc=xx,dc=com"]
+ldap.search.return.attributes=["uidNumber", "cn", "sn","sn","sn","uid","cn","mail","gidNumber","cn","createTimestamp","uid"]
+ldap.inactive.domain=
+
+ldap.group.app.id=301
+ldap.group.context.factory=com.sun.jndi.ldap.LdapCtxFactory
+ldap.group.context.provider.url=ldap://xx:389
+ldap.group.context.security.principal=cn=xx,dc=xx,dc=com
+ldap.group.context.security.credentials=xxx
+ldap.group.search.domains=["cn=xx,ou=xx,dc=xx,dc=com"]
+ldap.group.search.return.attributes=["gidNumber", "cn"]

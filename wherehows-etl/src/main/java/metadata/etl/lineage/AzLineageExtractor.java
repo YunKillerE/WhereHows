@@ -45,15 +45,29 @@ public class AzLineageExtractor {
     List<LineageRecord> oneAzkabanJobLineage = new ArrayList<>();
 
     // azkaban job name should have subflow name append in front
+    logger.error("add by yc: get flowSequence value");
     String[] flowSequence = message.azkabanJobExecution.getFlowPath().split(":")[1].split("/");
-    String jobPrefix = "";
-    for (int i = 1; i < flowSequence.length; i++) {
-      jobPrefix += flowSequence[i] + ":";
+    logger.error("add by yc: get flowSequence length:"+flowSequence.length);
+    for(String s: flowSequence) {
+      logger.error("add by yc: get flowSequence value: \""+s+"\"");
     }
+    String jobPrefix = "";
+
+    if(flowSequence.length > 2) {
+      for (int i = 1; i < flowSequence.length; i++) {
+        logger.error("add by yc: flowSequence[i] \""+flowSequence[i]+"\"");
+        jobPrefix += flowSequence[i] + ":";
+      }
+    }
+
+    logger.error("add by yc: get jobPrefix value: \""+jobPrefix+"\"");
     //String log = asc.getExecLog(azJobExec.execId, azJobExec.jobName);
+    logger.error("add by yc: begin get log value");
     String log =
       message.adc.getExecLog(message.azkabanJobExecution.getFlowExecId(), jobPrefix + message.azkabanJobExecution.getJobName());
+    logger.error("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx log="+log);
     Set<String> hadoopJobIds = AzLogParser.getHadoopJobIdFromLog(log);
+    logger.error("add by yc: get hadoopJobIds value:"+hadoopJobIds.toString());
 
     for (String hadoopJobId : hadoopJobIds) {
       logger.debug("Get Hadoop job config: {} from Azkaban job: {}" + hadoopJobId, message.azkabanJobExecution.toString());
@@ -67,10 +81,10 @@ public class AzLineageExtractor {
 
     // normalize and combine the path
     LineageCombiner lineageCombiner = new LineageCombiner(message.connection);
-    lineageCombiner.addAll(oneAzkabanJobLineage);
+    lineageCombiner.addAllWoPartitionUpdate(oneAzkabanJobLineage);
     Integer defaultDatabaseId = Integer.valueOf(message.prop.getProperty(Constant.AZ_DEFAULT_HADOOP_DATABASE_ID_KEY));
     List<LineageRecord> lineageFromLog = AzLogParser.getLineageFromLog(log, message.azkabanJobExecution, defaultDatabaseId);
-    lineageCombiner.addAll(lineageFromLog);
+    lineageCombiner.addAllWoPartitionUpdate(lineageFromLog);
 
     return lineageCombiner.getCombinedLineage();
   }
@@ -82,6 +96,7 @@ public class AzLineageExtractor {
    */
   public static void extract(AzExecMessage message)
     throws Exception {
+    logger.info("=========begin===========================================================================");
     try{
       List<LineageRecord> result = extractLineage(message);
       for (LineageRecord lr : result) {
@@ -91,6 +106,7 @@ public class AzLineageExtractor {
       message.databaseWriter.flush();
     } catch (Exception e) {
       logger.error(String.format("Failed to extract lineage info from [%s].\n%s", message.toString(), e.getMessage()));
+      logger.info("=========end===========================================================================");
     }
   }
 }

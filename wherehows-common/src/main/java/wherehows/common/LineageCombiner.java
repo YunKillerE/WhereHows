@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import wherehows.common.schemas.LineageRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -30,6 +32,8 @@ import wherehows.common.schemas.LineageRecord;
  * Created by zsun on 9/11/15.
  */
 public class LineageCombiner {
+
+  private static final Logger logger = LoggerFactory.getLogger(LineageCombiner.class);
 
   // key is the operation + abstract name, value is the record
   private Map<String, LineageRecord> _lineageRecordMap;
@@ -61,7 +65,23 @@ public class LineageCombiner {
     for (LineageRecord lr : rawLineageRecords) {
       DatasetPath datasetPath = PathAnalyzer.analyze(lr.getFullObjectName());
       if (datasetPath != null) {
-        lr.setAbstractObjectName(datasetPath.abstractPath);
+        String abo = "";
+        if(datasetPath.abstractPath.contains("viewfs")  & datasetPath.abstractPath.length() > 7) {
+          String[] aboArray = datasetPath.abstractPath.split("/");
+          for(String s:aboArray){
+            logger.debug("add by yc abstractPath1===================" + s);
+          }
+          abo = "/" + aboArray[7].replace(".db", "") + "/" + aboArray[8];
+          logger.debug("add by yc abstractPath1===================" + abo);
+        }else{
+          abo = datasetPath.abstractPath;
+          String[] aboArray = datasetPath.abstractPath.split("/");
+          for(String s:aboArray){
+            logger.debug("add by yc abstractPath2===================" + s);
+          }
+          logger.debug("add by yc abstractPath2 FULL===================" + abo);
+        }
+        lr.setAbstractObjectName(abo);
         lr.setLayoutId(datasetPath.layoutId);
         if (lr.getPartitionStart() == null) {
           lr.setPartitionStart(datasetPath.partitionStart);
